@@ -20,13 +20,16 @@ As principais funções implementadas foram:
 A função main() é responsável por ler os dados de entrada, fazer as chamadas para construir os grafos e executar os algoritmos de busca, e por fim,  imprimir os resultados
 
 Como executar
+
 ./bin/tp2.out
 
 Como gerar e analisar os resultados
+
 ./test.sh
 python3 analyze.py
 
 Dependências
+
 - g++
 - Python 3
 - Bibliotecas: matplotlib, pandas
