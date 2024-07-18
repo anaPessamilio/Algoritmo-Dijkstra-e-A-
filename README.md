@@ -19,14 +19,18 @@ As principais funções implementadas foram:
 - remover(): Remove e retorna o elemento com menor custo da fila.
 A função main() é responsável por ler os dados de entrada, fazer as chamadas para construir os grafos e executar os algoritmos de busca, e por fim,  imprimir os resultados
 
+Para gerar grafos aleatórios, para testes:
+
+- g++ geraGrafo.cpp -o geraGrafo.out
+- ./geraGrafo.out
+  
 Como executar:
 
+- make
 - ./bin/tp2.out
 
 Como gerar e analisar os resultados:
 
-- ./test.sh
-- python3 analyze.py
 
 Dependências:
 
