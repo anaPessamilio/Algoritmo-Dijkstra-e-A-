@@ -1,4 +1,4 @@
-#include "Grafo.h"
+#include "../include/Grafo.h"
 
 No::No(int v, double p) : aresta(v, p), proximo(nullptr) {}
 

@@ -1,4 +1,4 @@
-#include "FilaDePrioridade.h"
+#include "../include/FilaDePrioridade.h"
 
 Elemento::Elemento(double c, int n, int p)
     : custo(c), no(n), portais(p), proximo(nullptr) {}
