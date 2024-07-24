@@ -1,39 +1,37 @@
-Introdução:
+Algoritmos de Busca em Grafos
+Este repositório contém a implementação dos algoritmos de busca Dijkstra e A* para encontrar o caminho mais curto em grafos. O projeto utiliza duas estruturas de dados principais: matriz de adjacência e lista de adjacência. O código foi escrito em C++ e inclui uma análise de desempenho detalhada e comparação entre diferentes abordagens.
 
-Implementação de um sistema de busca em um ambiente de clareiras interligadas por trilhas e portais. O problema consiste em encontrar caminhos eficientes entre pontos específicos, respeitando restrições de quantidades de energia e portais. Utilizando os algoritmos  Dijkstra e A*, adaptados com filas de prioridade, a solução emprega estruturas de dados como listas de adjacência e heurísticas de distância euclidiana para maximizar a eficácia da busca.
+Estruturas de Dados
+Grafo: Representa o grafo usando duas estruturas de dados:
 
-Método:
+Matriz de Adjacência: Armazena as distâncias entre os vértices.
+Lista de Adjacência: Armazena as conexões entre os vértices e portais.
+Fila de Prioridade: Implementa um heap para suportar operações de inserção e remoção com base no menor custo. Armazena o custo, o nó associado e o número de portais usados.
 
-A implementação do programa foi feita na linguagem C++, tendo como base inicial os algoritmos  Dijkstra e A*.
-As duas estruturas de dados implementadas foram:
+Funcionalidades
+Algoritmo Dijkstra: Encontra o caminho mais curto em grafos com pesos não negativos.
+Algoritmo A*: Encontra o caminho mais curto utilizando uma heurística para guiar a busca, otimizando o tempo de execução.
+Compilação
+Para compilar o projeto, use o seguinte comando:
 
-- Grafo: Utiliza uma matriz de adjacência para armazenar as distâncias euclidianas entre as clareiras e uma lista de adjacência para armazenar as conexões de portais. Contém o TAD No, que representa um nó na lista de adjacência do grafo, contendo informações sobre a aresta e o próximo nó na lista.
-- FilaDePrioridade: Utiliza uma fila de prioridade para suportar operações de inserção e remoção de elementos com base em custos associados. Contém o TAD Elemento, que  armazena o custo, nó associado e número de portais usados.
-  
-As principais funções implementadas foram:
+g++ -std=c++11 -O2 -g -Wall -c src/Grafo.cpp -o obj/Grafo.o -I./include/
+g++ -std=c++11 -O2 -g -Wall -c src/tp2.cpp -o obj/tp2.o -I./include/
+g++ -std=c++11 -O2 -g -Wall -o ./bin/tp2.out ./obj/Grafo.o ./obj/tp2.o ./obj/FilaDePrioridade.o
 
-- definirCoordenada(int u, double x, double y): Define as coordenadas de uma clareira.
-- obterDistancia(int u, int v): Calcula a distância euclidiana entre duas clareiras.
-- adicionarAresta(int u, int v, double peso): Adiciona uma aresta (trilha ou portal) entre duas clareiras.
-- adicionar(double custo, int no, int portais): Adiciona um elemento na fila com base no custo.
-- remover(): Remove e retorna o elemento com menor custo da fila.
-A função main() é responsável por ler os dados de entrada, fazer as chamadas para construir os grafos e executar os algoritmos de busca, e por fim,  imprimir os resultados
+Execução
+Para executar o programa, utilize o comando:
 
-Para gerar grafos aleatórios, para testes:
+./bin/tp2.out < entrada.txt
 
-- g++ geraGrafo.cpp -o geraGrafo.out
-- ./geraGrafo.out
-  
-Como executar:
+Certifique-se de que o arquivo entrada.txt está no mesmo diretório que o executável. Este arquivo deve conter as entradas para o algoritmo.
 
-- make
-- ./bin/tp2.out
+Análise de Desempenho
+O projeto inclui análises detalhadas de desempenho usando ferramentas como chrono para medir o tempo de execução e Valgrind para avaliar a localidade de referência. Para gerar gráficos comparativos e visualizar os resultados, foram utilizados scripts Python.
 
-Como gerar e analisar os resultados:
-
-
-Dependências:
-
-- g++
-- Python 3
-- Bibliotecas: matplotlib, pandas
+Referências
+Valgrind: Documentação do Valgrind
+chrono: Funções Chrono no Microsoft Docs
+Python para Gráficos: Dicas de Gráficos em Python
+Algoritmo A*: Wikipedia
+Dijkstra: Repositório GitHub
+Código de Marcos Castro: Gist
