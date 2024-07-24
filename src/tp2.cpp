@@ -33,15 +33,16 @@ int* dijkstra(Grafo &g, int inicio, int objetivo, double energia, int maxPortais
 
         if (custoAtual > energia) continue;
 
-        for (const No* no = g.obterArestas(atual); no != nullptr; no = no->proximo) {
-            int vizinho = no->aresta.first;
-            double peso = no->aresta.second;
-            double novoCusto = custoAtual + peso;
-            int novoContadorPortais = portaisUsados + (peso == 0 ? 1 : 0);
-            if (novoCusto <= energia && novoCusto < dist[vizinho] && novoContadorPortais <= maxPortais) {
-                dist[vizinho] = novoCusto;
-                contadorPortais[vizinho] = novoContadorPortais;
-                conjuntoAberto.adicionar(novoCusto, vizinho, novoContadorPortais);
+        for (int vizinho = 0; vizinho < g.tamanho(); ++vizinho) {
+            double peso = g.obterAresta(atual, vizinho);
+            if (peso < INF) { // Existe aresta
+                double novoCusto = custoAtual + peso;
+                int novoContadorPortais = portaisUsados + (peso == 0 ? 1 : 0);
+                if (novoCusto <= energia && novoCusto < dist[vizinho] && novoContadorPortais <= maxPortais) {
+                    dist[vizinho] = novoCusto;
+                    contadorPortais[vizinho] = novoContadorPortais;
+                    conjuntoAberto.adicionar(novoCusto, vizinho, novoContadorPortais);
+                }
             }
         }
     }
@@ -82,17 +83,18 @@ int* a_estrela(Grafo &g, int inicio, int objetivo, double energia, int maxPortai
             return resultado;
         }
 
-        if (custoAtual > energia) continue;
+        if (custoAtual > energia || portaisUsados > maxPortais) continue;
 
-        for (const No* no = g.obterArestas(atual); no != nullptr; no = no->proximo) {
-            int vizinho = no->aresta.first;
-            double peso = no->aresta.second;
-            double novoCusto = custoAtual + peso;
-            int novoContadorPortais = portaisUsados + (peso == 0 ? 1 : 0);
-            if (novoCusto <= energia && novoCusto < dist[vizinho] && novoContadorPortais <= maxPortais) {
-                dist[vizinho] = novoCusto;
-                contadorPortais[vizinho] = novoContadorPortais;
-                conjuntoAberto.adicionar(novoCusto + heuristica(g, vizinho, objetivo), vizinho, novoContadorPortais);
+        for (int vizinho = 0; vizinho < g.tamanho(); ++vizinho) {
+            double peso = g.obterAresta(atual, vizinho);
+            if (peso < INF) { // Existe aresta
+                double novoCusto = custoAtual + peso;
+                int novoContadorPortais = portaisUsados + (peso == 0 ? 1 : 0);
+                if (novoCusto <= energia && novoCusto < dist[vizinho] && novoContadorPortais <= maxPortais) {
+                    dist[vizinho] = novoCusto;
+                    contadorPortais[vizinho] = novoContadorPortais;
+                    conjuntoAberto.adicionar(novoCusto + heuristica(g, vizinho, objetivo), vizinho, novoContadorPortais);
+                }
             }
         }
     }
@@ -103,58 +105,63 @@ int* a_estrela(Grafo &g, int inicio, int objetivo, double energia, int maxPortai
 }
 
 int main() {
-    int n, m, k;
-    std::cin >> n >> m >> k;
+    int numExecucoes;
+    std::cin >> numExecucoes;
 
-    Grafo g(n);
+    for (int exec = 0; exec < numExecucoes; ++exec) {
+        int n, m, k;
+        std::cin >> n >> m >> k;
 
-    for (int i = 0; i < n; ++i) {
-        double x, y;
-        std::cin >> x >> y;
-        g.definirCoordenada(i, x, y);
+        Grafo g(n);
+
+        for (int i = 0; i < n; ++i) {
+            double x, y;
+            std::cin >> x >> y;
+            g.definirCoordenada(i, x, y);
+        }
+
+        for (int i = 0; i < m; ++i) {
+            int u, v;
+            std::cin >> u >> v;
+            double peso = g.obterDistancia(u, v);
+            g.adicionarAresta(u, v, peso);
+        }
+
+        for (int i = 0; i < k; ++i) {
+            int u, v;
+            std::cin >> u >> v;
+            g.adicionarAresta(u, v, 0); // Peso 0 para portais
+        }
+
+        double energia;
+        int maxPortais;
+        std::cin >> energia >> maxPortais;
+
+        // Medir tempo de execução para Dijkstra
+        auto startDijkstra = std::chrono::high_resolution_clock::now();
+        int* resultadoDijkstra = dijkstra(g, 0, n - 1, energia, maxPortais);
+        auto endDijkstra = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsedDijkstra = endDijkstra - startDijkstra;
+
+        // Medir tempo de execução para A*
+        auto startAEstrela = std::chrono::high_resolution_clock::now();
+        int* resultadoAEstrela = a_estrela(g, 0, n - 1, energia, maxPortais);
+        auto endAEstrela = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsedAEstrela = endAEstrela - startAEstrela;
+
+        // Salvar resultados em arquivo CSV
+        std::ofstream file("tempos_execucao.csv", std::ios::app);
+        if (file.is_open()) {
+            file << n << "," << m << "," << energia << "," << maxPortais << ","
+                 << elapsedDijkstra.count() << "," << elapsedAEstrela.count() << "\n";
+            file.close();
+        }
+
+        std::cout << "Execução " << exec + 1 << ": Dijkstra: " << resultadoDijkstra[0] << " A*: " << resultadoAEstrela[0] << "\n";
+        
+        delete[] resultadoDijkstra;
+        delete[] resultadoAEstrela;
     }
-
-    for (int i = 0; i < m; ++i) {
-        int u, v;
-        std::cin >> u >> v;
-        double peso = g.obterDistancia(u, v);
-        g.adicionarAresta(u, v, peso);
-    }
-
-    for (int i = 0; i < k; ++i) {
-        int u, v;
-        std::cin >> u >> v;
-        g.adicionarAresta(u, v, 0); // Peso 0 para portais
-    }
-
-    double energia;
-    int maxPortais;
-    std::cin >> energia >> maxPortais;
-
-    // Medir tempo de execução para Dijkstra
-    auto startDijkstra = std::chrono::high_resolution_clock::now();
-    int* resultadoDijkstra = dijkstra(g, 0, n - 1, energia, maxPortais);
-    auto endDijkstra = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsedDijkstra = endDijkstra - startDijkstra;
-
-    // Medir tempo de execução para A*
-    auto startAEstrela = std::chrono::high_resolution_clock::now();
-    int* resultadoAEstrela = a_estrela(g, 0, n - 1, energia, maxPortais);
-    auto endAEstrela = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsedAEstrela = endAEstrela - startAEstrela;
-
-    // Salvar resultados em arquivo CSV
-    std::ofstream file("tempos_execucao.csv", std::ios::app);
-    if (file.is_open()) {
-        file << n << "," << m << "," << energia << "," << maxPortais << ","
-             << elapsedDijkstra.count() << "," << elapsedAEstrela.count() << "\n";
-        file.close();
-    }
-
-    std::cout << "Dijkstra: " << resultadoDijkstra[0] << " A*: " << resultadoAEstrela[0] << "\n";
-    
-    delete[] resultadoDijkstra;
-    delete[] resultadoAEstrela;
 
     return 0;
 }

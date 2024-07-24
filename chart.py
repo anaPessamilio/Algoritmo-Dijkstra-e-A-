@@ -61,16 +61,16 @@ def calculate_r2(x, y):
 # Gráficos comparativos
 r2_dijkstra = calculate_r2(n, tempo_dijkstra)
 r2_a_star = calculate_r2(n, tempo_a_estrela)
-plot_comparison_graph(n, tempo_dijkstra, tempo_a_estrela, 'Número de Nós', 'Tempo de Execução (s)', 'Tempo de Execução vs Número de Nós', 'comparison_vs_n.png')
+plot_comparison_graph(n, tempo_dijkstra, tempo_a_estrela, 'Número de Nós', 'Tempo de Execução (s)', 'Tempo de Execução vs Número de Nós (Matriz)', 'comparison_vs_n.png')
 
 r2_dijkstra = calculate_r2(m, tempo_dijkstra)
 r2_a_star = calculate_r2(m, tempo_a_estrela)
-plot_comparison_graph(m, tempo_dijkstra, tempo_a_estrela, 'Número de Arestas', 'Tempo de Execução (s)', 'Tempo de Execução vs Número de Arestas', 'comparison_vs_m.png')
+plot_comparison_graph(m, tempo_dijkstra, tempo_a_estrela, 'Número de Arestas', 'Tempo de Execução (s)', 'Tempo de Execução vs Número de Arestas (Matriz)', 'comparison_vs_m.png')
 
 r2_dijkstra = calculate_r2(energia, tempo_dijkstra)
 r2_a_star = calculate_r2(energia, tempo_a_estrela)
-plot_comparison_graph(energia, tempo_dijkstra, tempo_a_estrela, 'Energia', 'Tempo de Execução (s)', 'Tempo de Execução vs Energia', 'comparison_vs_energia.png')
+plot_comparison_graph(energia, tempo_dijkstra, tempo_a_estrela, 'Energia', 'Tempo de Execução (s)', 'Tempo de Execução vs Energia (Matriz)', 'comparison_vs_energia.png')
 
 r2_dijkstra = calculate_r2(portais, tempo_dijkstra)
 r2_a_star = calculate_r2(portais, tempo_a_estrela)
-plot_comparison_graph(portais, tempo_dijkstra, tempo_a_estrela, 'Número Máximo de Portais', 'Tempo de Execução (s)', 'Tempo de Execução vs Número Máximo de Portais', 'comparison_vs_portais.png')
+plot_comparison_graph(portais, tempo_dijkstra, tempo_a_estrela, 'Número Máximo de Portais', 'Tempo de Execução (s)', 'Tempo de Execução vs Número Máximo de Portais (Matriz)', 'comparison_vs_portais.png')

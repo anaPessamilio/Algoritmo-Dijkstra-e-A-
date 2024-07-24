@@ -1,22 +1,22 @@
 #include "../include/Grafo.h"
 
-No::No(int v, double p) : aresta(v, p), proximo(nullptr) {}
-
 Grafo::Grafo(int n) : numVertices(n) {
-    listaAdj = new No*[n];
+    matrizAdj = new double*[n];
+    for (int i = 0; i < n; ++i) {
+        matrizAdj[i] = new double[n];
+        for (int j = 0; j < n; ++j) {
+            matrizAdj[i][j] = INFINITY; // Inicializa com infinito (sem aresta)
+        }
+    }
     coordenadas = new Coordenada[n];
-    for (int i = 0; i < n; ++i)
-        listaAdj[i] = nullptr;
 }
 
 void Grafo::adicionarAresta(int u, int v, double peso) {
-    No* novo = new No(v, peso);
-    novo->proximo = listaAdj[u];
-    listaAdj[u] = novo;
+    matrizAdj[u][v] = peso;
 }
 
-const No* Grafo::obterArestas(int u) const {
-    return listaAdj[u];
+double Grafo::obterAresta(int u, int v) const {
+    return matrizAdj[u][v];
 }
 
 void Grafo::definirCoordenada(int u, double x, double y) {
@@ -35,12 +35,7 @@ int Grafo::tamanho() const {
 Grafo::~Grafo() {
     delete[] coordenadas;
     for (int i = 0; i < numVertices; ++i) {
-        No* atual = listaAdj[i];
-        while (atual) {
-            No* proximo = atual->proximo;
-            delete atual;
-            atual = proximo;
-        }
+        delete[] matrizAdj[i];
     }
-    delete[] listaAdj;
+    delete[] matrizAdj;
 }

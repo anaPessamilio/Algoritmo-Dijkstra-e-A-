@@ -7,22 +7,15 @@
 typedef std::pair<int, int> Aresta;
 typedef std::pair<double, double> Coordenada;
 
-struct No {
-    Aresta aresta;
-    No* proximo;
-    
-    No(int v, double p);
-};
-
 class Grafo {
-    No** listaAdj;
+    double** matrizAdj;
     Coordenada* coordenadas;
     int numVertices;
 
 public:
     Grafo(int n);
     void adicionarAresta(int u, int v, double peso);
-    const No* obterArestas(int u) const;
+    double obterAresta(int u, int v) const;
     void definirCoordenada(int u, double x, double y);
     double obterDistancia(int u, int v) const;
     int tamanho() const;
