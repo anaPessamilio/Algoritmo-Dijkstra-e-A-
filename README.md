@@ -34,7 +34,7 @@ Para executar o programa, utilize o comando:
 
 Certifique-se de que o arquivo entrada.txt está no mesmo diretório que o executável. Este arquivo deve conter as entradas para o algoritmo.
 
-## Análise de Desempenho
+# Análise de Desempenho
 
 O projeto inclui análises detalhadas de desempenho usando ferramentas como chrono para medir o tempo de execução e Valgrind para avaliar a localidade de referência. Para gerar gráficos comparativos e visualizar os resultados, foram utilizados scripts Python.
 
