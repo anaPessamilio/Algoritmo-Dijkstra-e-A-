@@ -30,7 +30,7 @@ Para compilar o projeto, use o seguinte comando:
 
 Para gerar o arquivo entradas.txt, execute o script geraEntradas.py:
 
-- python geraEntradas.py
+- python3 geraEntradas.py
   
 ## Execução
 
@@ -44,7 +44,7 @@ Certifique-se de que o arquivo entrada.txt está no mesmo diretório que o execu
 
 Para gerar gráficos comparativos, execute o script chart.py:
 
-- python chart.py
+- python3 chart.py
   
 ## Análise de Localidade de Referência
 
