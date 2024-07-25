@@ -22,10 +22,16 @@ Este repositório contém a implementação dos algoritmos de busca Dijkstra e A
 
 Para compilar o projeto, use o seguinte comando:
 
-g++ -std=c++11 -O2 -g -Wall -c src/Grafo.cpp -o obj/Grafo.o -I./include/
-g++ -std=c++11 -O2 -g -Wall -c src/tp2.cpp -o obj/tp2.o -I./include/
-g++ -std=c++11 -O2 -g -Wall -o ./bin/tp2.out ./obj/Grafo.o ./obj/tp2.o ./obj/FilaDePrioridade.o
+- g++ -std=c++11 -O2 -g -Wall -c src/Grafo.cpp -o obj/Grafo.o -I./include/
+- g++ -std=c++11 -O2 -g -Wall -c src/tp2.cpp -o obj/tp2.o -I./include/
+- g++ -std=c++11 -O2 -g -Wall -o ./bin/tp2.out ./obj/Grafo.o ./obj/tp2.o ./obj/FilaDePrioridade.o
 
+# Geração de Entradas:
+
+Para gerar o arquivo entradas.txt, execute o script geraEntradas.py:
+
+- python geraEntradas.py
+  
 # Execução
 
 Para executar o programa, utilize o comando:
@@ -34,8 +40,16 @@ Para executar o programa, utilize o comando:
 
 Certifique-se de que o arquivo entrada.txt está no mesmo diretório que o executável. Este arquivo deve conter as entradas para o algoritmo.
 
+# Gráficos de Desempenho: 
+
+Para gerar gráficos comparativos, execute o script chart.py:
+
+- python chart.py
+  
 # Análise de Desempenho
 
-O projeto inclui análises detalhadas de desempenho usando ferramentas como chrono para medir o tempo de execução e Valgrind para avaliar a localidade de referência. Para gerar gráficos comparativos e visualizar os resultados, foram utilizados scripts Python.
+Para analisar o desempenho do programa, você pode usar o Valgrind. Execute o programa com Valgrind para avaliar a localidade de referência e o uso de cache:
+
+- valgrind --tool=cachegrind ./bin/tp2.out
 
 
