@@ -18,7 +18,7 @@ Este repositório contém a implementação dos algoritmos de busca Dijkstra e A
 
 - Algoritmo A*: Encontra o caminho mais curto utilizando uma heurística para guiar a busca, otimizando o tempo de execução.
 
-# Compilação
+## Compilação
 
 Para compilar o projeto, use o seguinte comando:
 
@@ -26,13 +26,13 @@ Para compilar o projeto, use o seguinte comando:
 - g++ -std=c++11 -O2 -g -Wall -c src/tp2.cpp -o obj/tp2.o -I./include/
 - g++ -std=c++11 -O2 -g -Wall -o ./bin/tp2.out ./obj/Grafo.o ./obj/tp2.o ./obj/FilaDePrioridade.o
 
-# Geração de Entradas:
+## Geração de Entradas:
 
 Para gerar o arquivo entradas.txt, execute o script geraEntradas.py:
 
 - python geraEntradas.py
   
-# Execução
+## Execução
 
 Para executar o programa, utilize o comando:
 
@@ -40,13 +40,13 @@ Para executar o programa, utilize o comando:
 
 Certifique-se de que o arquivo entrada.txt está no mesmo diretório que o executável. Este arquivo deve conter as entradas para o algoritmo.
 
-# Gráficos de Desempenho: 
+## Análise de Desempenho: 
 
 Para gerar gráficos comparativos, execute o script chart.py:
 
 - python chart.py
   
-# Análise de Desempenho
+## Análise de Localidade de Referência
 
 Para analisar o desempenho do programa, você pode usar o Valgrind. Execute o programa com Valgrind para avaliar a localidade de referência e o uso de cache:
 
