@@ -52,4 +52,14 @@ Para analisar o desempenho do programa, você pode usar o Valgrind. Execute o pr
 
 - valgrind --tool=cachegrind ./bin/tp2.out
 
+## Dependências para Execução do Programa
+
+- Compilador C++ (GCC/G++)
+  - sudo apt-get install g++
+- Valgrind
+  - sudo apt-get install valgrind
+- Python
+  - sudo apt-get install python3
+- Biblioteca Python Matplotlib
+  -  pip install matplotlib
 
